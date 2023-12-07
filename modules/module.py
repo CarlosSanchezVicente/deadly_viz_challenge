@@ -117,3 +117,31 @@ def pivot_table(df, col, x_axis, value='Total'):
                         index=x_axis,
                         aggfunc='sum')
     return df.reset_index()
+
+def date_transform(date_str):
+    '''
+    Return: a date in string format, cleaned and translated.
+    
+    Input parameters:
+        - date_str: the date (string format) from INE dataset
+    '''
+    # This dictionary is used to translate the months from Spanish to English.
+    months_translation = {
+        'enero': 'January',
+        'febrero': 'February',
+        'marzo': 'March',
+        'abril': 'April',
+        'mayo': 'May',
+        'junio': 'June',
+        'julio': 'July',
+        'agosto': 'August',
+        'septiembre': 'September',
+        'octubre': 'October',
+        'noviembre': 'November',
+        'diciembre': 'December'
+    }
+
+    result = date_str.split(' de ')   # Split the string using ' de '.
+    result[1] = months_translation[result[1]]   # Translate the month from Spanish to English.
+    
+    return ' '.join(result)   # Returns the join of the 3 strings that form the list.
